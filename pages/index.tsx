@@ -1,14 +1,16 @@
-import React, { useEffect } from "react";
-import { getUsers } from "../utils/users";
+import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import SignInWithGoogleButton from "../components/firebase/SignInWithGoogleButton";
+import SignOut from "../components/firebase/SignOut";
+import { auth } from "../utils/firebase";
 
 export default function Home() {
-  useEffect(() => {
-    async function fetchData() {
-      const snap = await getUsers();
-      snap.docs.forEach((doc) => console.log(doc.data()));
-    }
-    fetchData();
-  }, []);
+  const [user] = useAuthState(auth);
 
-  return <h1>Swag</h1>;
+  return (
+    <>
+      {user ? <h1>Swag</h1> : <SignInWithGoogleButton />}
+      <SignOut />
+    </>
+  );
 }
