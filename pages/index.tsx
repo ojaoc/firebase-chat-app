@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase9-hooks/auth';
-import ChatRoom from '../components/ChatRoom';
+import ChatRoom from '../components/chat/ChatRoom';
 import SignInWithGoogleButton from '../components/firebase/SignInWithGoogleButton';
 import SignOut from '../components/firebase/SignOut';
 import { auth } from '../utils/firebase';
@@ -16,10 +16,9 @@ export default function Home() {
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
-      py={5}
     >
       {user ? <ChatRoom /> : <SignInWithGoogleButton />}
-      <Box mt={5}>
+      <Box mt={2}>
         <SignOut />
       </Box>
     </Box>
