@@ -4,6 +4,7 @@ body {
     margin: 0;
     font-family: "Roboto";
     background-color: #023047;
+    min-width: 320px;
 }
 
 a {
