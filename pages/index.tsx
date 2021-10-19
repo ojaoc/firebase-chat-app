@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 
 export default function Home() {
   const [user] = useAuthState(auth);
-
+  //.
   return (
     <Box
       height="100vh"
