@@ -1,22 +1,27 @@
 import { collection, limit, orderBy, query } from '@firebase/firestore';
-import React, { Component, useRef } from 'react';
-import { auth, firestore } from '../../utils/firebase';
-import { useCollectionData } from 'react-firebase9-hooks/firestore';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
 import { styled } from '@material-ui/styles';
-import CircularProgress from '@mui/material/CircularProgress';
-import MessageForm from './MessageForm';
-import Image from 'next/image';
 import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
+import Paper, { PaperProps } from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
+import React, { useRef } from 'react';
+import { useCollectionData } from 'react-firebase9-hooks/firestore';
+import { auth, firestore } from '../../utils/firebase';
+import MessageForm from './MessageForm';
 
-const MessageContainer = styled(Paper)(({ sentByMe }) => ({
-  background: '#219ebc',
-  borderRadius: sentByMe ? '15px 2px 15px 15px' : '2px 15px 15px 15px',
-  color: 'white',
-  padding: '1rem',
-}));
+interface ExtraPaperProps {
+  sentByMe: Boolean;
+}
+
+const MessageContainer = styled(Paper)(
+  ({ sentByMe }: PaperProps & ExtraPaperProps) => ({
+    background: '#219ebc',
+    borderRadius: sentByMe ? '15px 2px 15px 15px' : '2px 15px 15px 15px',
+    color: 'white',
+    padding: '1rem',
+  })
+);
 
 const ChatRoom = () => {
   const dummy = useRef();
