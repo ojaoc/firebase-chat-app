@@ -30,6 +30,7 @@ const MessageForm = ({ dummyDivRef }) => {
       <form onSubmit={handleSendMessage}>
         <Box display="flex">
           <TextField
+            color="secondary"
             variant="filled"
             size="small"
             hiddenLabel
@@ -40,7 +41,7 @@ const MessageForm = ({ dummyDivRef }) => {
           />
           <Box ml={1}>
             <IconButton
-              color="primary"
+              color="secondary"
               aria-label="send-message"
               type="submit"
               disabled={!Boolean(message)}

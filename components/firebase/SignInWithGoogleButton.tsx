@@ -10,7 +10,7 @@ const SignInWithGoogleButton = () => {
   };
 
   return (
-    <Button variant="outlined" onClick={handleSignIn}>
+    <Button variant="contained" color="secondary" onClick={handleSignIn}>
       Sign in
     </Button>
   );

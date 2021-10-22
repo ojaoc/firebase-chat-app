@@ -9,7 +9,7 @@ const SignOut = () => {
 
   return (
     auth.currentUser && (
-      <Button variant="outlined" onClick={handleSignOut}>
+      <Button variant="contained" color="secondary" onClick={handleSignOut}>
         Sign out
       </Button>
     )

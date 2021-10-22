@@ -1,5 +1,5 @@
 import { collection, limit, orderBy, query } from '@firebase/firestore';
-import { styled } from '@material-ui/styles';
+import { styled } from '@mui/material/styles';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -16,9 +16,9 @@ interface ExtraPaperProps {
 
 const MessageContainer = styled(Paper)(
   ({ sentByMe }: PaperProps & ExtraPaperProps) => ({
-    background: '#219ebc',
+    background: '#E3AB44',
     borderRadius: sentByMe ? '15px 2px 15px 15px' : '2px 15px 15px 15px',
-    color: 'white',
+    color: 'black',
     padding: '1rem',
   })
 );
