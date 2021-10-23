@@ -27,7 +27,7 @@ const ChatRoom = () => {
   const dummy = useRef<HTMLDivElement>(null);
 
   const messagesRef = collection(firestore, 'messages');
-  const q = query(messagesRef, orderBy('createdAt'), limit(25));
+  const q = query(messagesRef, orderBy('createdAt'));
 
   const [values, loading, error] = useCollectionData(q, { idField: 'id' });
 
