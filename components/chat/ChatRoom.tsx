@@ -31,7 +31,7 @@ const ChatRoom = () => {
 
   const [values, loading, error] = useCollectionData(q, { idField: 'id' });
 
-  if (loading) return <CircularProgress />;
+  if (loading) return <CircularProgress color="secondary" />;
   if (error) return <h1>Something fucky happened</h1>;
 
   return (
