@@ -1,19 +1,23 @@
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
-import React, { FormEvent, MutableRefObject, useState } from 'react';
+import React, { FormEvent, RefObject, useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
 import Box from '@mui/system/Box';
 import { auth, firestore } from '../../utils/firebase';
 import { addDoc, collection, serverTimestamp } from '@firebase/firestore';
 
-const MessageForm = ({ dummyDivRef }) => {
+interface MessageFormProps {
+  dummyDivRef: RefObject<HTMLDivElement>;
+}
+
+const MessageForm = ({ dummyDivRef }: MessageFormProps) => {
   const [message, setMessage] = useState('');
 
   const handleSendMessage = async (e: FormEvent) => {
     e.preventDefault();
     setMessage('');
 
-    const { uid, photoURL } = auth.currentUser;
+    const { uid, photoURL } = auth.currentUser ?? {};
 
     await addDoc(collection(firestore, 'messages'), {
       text: message,
@@ -22,7 +26,7 @@ const MessageForm = ({ dummyDivRef }) => {
       photoURL,
     });
 
-    dummyDivRef.current.scrollIntoView({ behaviour: 'smooth' });
+    dummyDivRef?.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (

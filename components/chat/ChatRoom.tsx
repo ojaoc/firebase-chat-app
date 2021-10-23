@@ -24,7 +24,7 @@ const MessageContainer = styled(Paper)(
 );
 
 const ChatRoom = () => {
-  const dummy = useRef();
+  const dummy = useRef<HTMLDivElement>(null);
 
   const messagesRef = collection(firestore, 'messages');
   const q = query(messagesRef, orderBy('createdAt'), limit(25));
@@ -39,8 +39,8 @@ const ChatRoom = () => {
       <Paper elevation={3}>
         <Box p={3} minHeight="70vh" maxHeight="80vh" overflow="auto">
           <Stack spacing={3}>
-            {values.map(({ id, uid, photoURL, text }, index) => {
-              const sentByMe = auth.currentUser.uid === uid;
+            {values?.map(({ id, uid, photoURL, text }, index) => {
+              const sentByMe = auth?.currentUser?.uid === uid;
 
               return (
                 <>
