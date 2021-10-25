@@ -17,11 +17,12 @@ const MessageForm = ({ dummyDivRef }: MessageFormProps) => {
     e.preventDefault();
     setMessage('');
 
-    const { uid, photoURL } = auth.currentUser ?? {};
+    const { uid, photoURL, displayName } = auth.currentUser ?? {};
 
     await addDoc(collection(firestore, 'messages'), {
       text: message,
       createdAt: serverTimestamp(),
+      displayName,
       uid,
       photoURL,
     });
