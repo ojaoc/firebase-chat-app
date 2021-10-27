@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAuthState } from 'react-firebase9-hooks/auth';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import ChatRoom from '../components/chat/ChatRoom';
 import SignInWithGoogleButton from '../components/firebase/SignInWithGoogleButton';
 import SignOut from '../components/firebase/SignOut';
