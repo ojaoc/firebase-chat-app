@@ -1,11 +1,12 @@
-import TextField from '@mui/material/TextField';
-import IconButton from '@mui/material/IconButton';
-import React, { FormEvent, RefObject, useState } from 'react';
-import SendIcon from '@mui/icons-material/Send';
-import Box from '@mui/system/Box';
-import { auth, firestore } from '../../utils/firebase';
 import { addDoc, collection, serverTimestamp } from '@firebase/firestore';
-import { Typography } from '@mui/material';
+import SendIcon from '@mui/icons-material/Send';
+import { FilledInput } from '@mui/material';
+import FormControl from '@mui/material/FormControl';
+import IconButton from '@mui/material/IconButton';
+import Box from '@mui/system/Box';
+import React, { FormEvent, RefObject, useState } from 'react';
+import { auth, firestore } from '../../utils/firebase';
+import WhosTypingHelperText from './WhosTypingHelperText';
 
 interface MessageFormProps {
   dummyDivRef: RefObject<HTMLDivElement>;
@@ -31,39 +32,16 @@ const MessageForm = ({ dummyDivRef }: MessageFormProps) => {
     dummyDivRef?.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const GetWhosTypingString = (usersTyping: String[]) => {
-    const [firstUser, ...remainingUsers] = usersTyping;
-
-    if (!firstUser) {
-      return '';
-    } else if (remainingUsers) {
-      if (remainingUsers.length > 1) {
-        return `${firstUser} and ${remainingUsers.length} others are typing`;
-      }
-      return `${firstUser} and other are typing`;
-    } else {
-      return `${firstUser} is typing`;
-    }
-  };
-
   return (
     <section>
       <form onSubmit={handleSendMessage}>
-        <Box display="flex" flexDirection="column">
-          <Box display="flex">
-            <Typography
-              sx={{ color: '#CDCDCD', fontWeight: 300 }}
-              variant="body2"
-              ml={1}
-              mb={0.3}
-            >
-              {GetWhosTypingString([])}
-            </Typography>
-          </Box>
-          <Box display="flex">
-            <TextField
+        <Box display="flex">
+          <FormControl
+            sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}
+          >
+            <WhosTypingHelperText />
+            <FilledInput
               color="secondary"
-              variant="filled"
               size="small"
               hiddenLabel
               fullWidth
@@ -71,16 +49,16 @@ const MessageForm = ({ dummyDivRef }: MessageFormProps) => {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
-            <Box ml={1}>
-              <IconButton
-                color="secondary"
-                aria-label="send-message"
-                type="submit"
-                disabled={!Boolean(message)}
-              >
-                <SendIcon />
-              </IconButton>
-            </Box>
+          </FormControl>
+          <Box ml={1} display="flex" alignSelf="flex-end">
+            <IconButton
+              color="secondary"
+              aria-label="send-message"
+              type="submit"
+              disabled={!Boolean(message)}
+            >
+              <SendIcon />
+            </IconButton>
           </Box>
         </Box>
       </form>
