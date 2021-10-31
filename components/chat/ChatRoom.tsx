@@ -131,7 +131,7 @@ const ChatRoom = () => {
             <div ref={dummy}></div>
           </Stack>
         </Box>
-        <Box p={1.5}>
+        <Box p={1.5} pt={0}>
           <MessageForm dummyDivRef={dummy} />
         </Box>
       </Paper>
