@@ -38,7 +38,12 @@ const MessageForm = ({ dummyDivRef }: MessageFormProps) => {
       <form onSubmit={handleSendMessage}>
         <Box display="flex">
           <FormControl
-            sx={{ width: '100%', display: 'flex', flexDirection: 'column' }}
+            sx={{
+              width: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              position: 'relative',
+            }}
           >
             <WhosTypingHelperText />
             <FilledInput

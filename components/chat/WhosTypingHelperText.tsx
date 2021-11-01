@@ -10,10 +10,18 @@ import {
 import { Typography } from '@mui/material';
 import { useFormControl } from '@mui/material/FormControl';
 import { Box } from '@mui/system';
-import React, { useCallback, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import React, { forwardRef, useCallback, useEffect } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import Collections from '../../utils/enums/collections.enum';
 import { auth, firestore } from '../../utils/firebase';
+
+// eslint-disable-next-line react/display-name
+const BoxForMotion = forwardRef((props: any, ref) => (
+  <Box {...props} ref={ref} />
+));
+
+const MotionComponent = motion(BoxForMotion);
 
 const WhosTypingHelperText = () => {
   const { focused } = useFormControl() || {};
@@ -47,6 +55,10 @@ const WhosTypingHelperText = () => {
 
   useEffect(() => {
     handleSetUserIsTyping(Boolean(focused));
+
+    return () => {
+      handleSetUserIsTyping(false);
+    };
   }, [focused, handleSetUserIsTyping]);
 
   const usersTypingRef = collection(firestore, Collections.UsersTyping);
@@ -73,19 +85,24 @@ const WhosTypingHelperText = () => {
   }
 
   return (
-    <Box display="flex" alignItems="center">
-      <Typography
-        sx={{ color: '#FAFAFA', fontWeight: 300 }}
-        variant="caption"
-        ml={1}
-        mb={0.2}
-      >
+    <MotionComponent
+      position="absolute"
+      top="-22px"
+      display="flex"
+      alignItems="center"
+      initial={{ opacity: 0, y: 15 }}
+      animate={{
+        opacity: 1,
+        y: 0,
+      }}
+    >
+      <Typography sx={{ color: '#FAFAFA' }} variant="caption" ml={1} mb={0.2}>
         {renderString}
       </Typography>
       <Box display="flex" ml={2.8}>
         <div className="dot-flashing"></div>
       </Box>
-    </Box>
+    </MotionComponent>
   );
 };
 

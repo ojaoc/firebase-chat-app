@@ -57,7 +57,6 @@ const ChatRoom = () => {
                       <Box
                         key={id}
                         minWidth="150px"
-                        maxWidth="250px"
                         alignSelf={sentByMe ? 'flex-end' : 'flex-start'}
                         display="flex"
                         flexDirection="column"
@@ -84,7 +83,15 @@ const ChatRoom = () => {
                               </Typography>
                             )}
 
-                            <Typography variant="body1">{text}</Typography>
+                            <Typography
+                              variant="body1"
+                              sx={{
+                                overflowWrap: 'break-word',
+                                maxWidth: '250px',
+                              }}
+                            >
+                              {text}
+                            </Typography>
                           </MessageContainer>
                         </Box>
                         <Box display="flex" alignSelf="flex-end" mt={0.3}>
