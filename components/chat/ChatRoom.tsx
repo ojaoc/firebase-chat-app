@@ -1,18 +1,19 @@
-import { collection, limit, orderBy, query } from '@firebase/firestore';
-import { styled } from '@mui/material/styles';
+import { collection, orderBy, query } from '@firebase/firestore';
+import { Typography } from '@mui/material';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 import Paper, { PaperProps } from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
-import React, { useRef } from 'react';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { auth, firestore } from '../../utils/firebase';
-import MessageForm from './MessageForm';
-import { Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import Image from 'next/image';
+import React, { useRef } from 'react';
+import { useCollectionData } from 'react-firebase-hooks/firestore';
+import Collections from '../../utils/enums/collections.enum';
+import { auth, firestore } from '../../utils/firebase';
+import MessageForm from './MessageForm';
 
 dayjs.extend(relativeTime);
 
@@ -33,7 +34,7 @@ const MessageContainer = styled(Paper)(
 const ChatRoom = () => {
   const dummy = useRef<HTMLDivElement>(null);
 
-  const messagesRef = collection(firestore, 'messages');
+  const messagesRef = collection(firestore, Collections.Messages);
   const q = query(messagesRef, orderBy('createdAt'));
 
   const [values, loading, error] = useCollectionData(q, { idField: 'id' });

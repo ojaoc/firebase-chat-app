@@ -5,6 +5,7 @@ import FormControl from '@mui/material/FormControl';
 import IconButton from '@mui/material/IconButton';
 import Box from '@mui/system/Box';
 import React, { FormEvent, RefObject, useState } from 'react';
+import Collections from '../../utils/enums/collections.enum';
 import { auth, firestore } from '../../utils/firebase';
 import WhosTypingHelperText from './WhosTypingHelperText';
 
@@ -21,7 +22,7 @@ const MessageForm = ({ dummyDivRef }: MessageFormProps) => {
 
     const { uid, photoURL, displayName } = auth.currentUser ?? {};
 
-    await addDoc(collection(firestore, 'messages'), {
+    await addDoc(collection(firestore, Collections.Messages), {
       text: message,
       createdAt: serverTimestamp(),
       displayName,
