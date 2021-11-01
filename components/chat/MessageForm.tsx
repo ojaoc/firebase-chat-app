@@ -7,7 +7,7 @@ import Box from '@mui/system/Box';
 import React, { FormEvent, RefObject, useState } from 'react';
 import Collections from '../../utils/enums/collections.enum';
 import { auth, firestore } from '../../utils/firebase';
-import WhosTypingHelperText from './WhosTypingHelperText';
+import IsTyping from './is-typing/IsTyping';
 
 interface MessageFormProps {
   dummyDivRef: RefObject<HTMLDivElement>;
@@ -45,7 +45,7 @@ const MessageForm = ({ dummyDivRef }: MessageFormProps) => {
               position: 'relative',
             }}
           >
-            <WhosTypingHelperText />
+            <IsTyping />
             <FilledInput
               color="secondary"
               size="small"
