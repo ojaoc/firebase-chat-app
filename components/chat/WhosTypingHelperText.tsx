@@ -96,7 +96,7 @@ const WhosTypingHelperText = () => {
         y: 0,
       }}
     >
-      <Typography sx={{ color: '#FAFAFA' }} variant="caption" ml={1} mb={0.2}>
+      <Typography sx={{ color: '#FAFAFA' }} variant="caption" ml={1}>
         {renderString}
       </Typography>
       <Box display="flex" ml={2.8}>
