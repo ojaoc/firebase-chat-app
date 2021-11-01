@@ -9,6 +9,7 @@ import {
 } from '@firebase/firestore';
 import { Typography } from '@mui/material';
 import { useFormControl } from '@mui/material/FormControl';
+import { Box } from '@mui/system';
 import React, { useCallback, useEffect } from 'react';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import Collections from '../../utils/enums/collections.enum';
@@ -52,13 +53,15 @@ const WhosTypingHelperText = () => {
   const q = query(usersTypingRef, orderBy('createdAt', 'desc'));
 
   const [values] = useCollectionData(q, { idField: 'id' });
-  const usersTyping = values?.map((value) => value.name) ?? [];
+  const usersTyping =
+    values?.map((value) => value.name).filter((name) => name !== displayName) ??
+    [];
 
   const [firstUser, ...remainingUsers] = usersTyping;
   let renderString;
 
   if (!firstUser) {
-    renderString = '';
+    return null;
   } else if (remainingUsers.length) {
     if (remainingUsers.length > 1) {
       renderString = `${firstUser} and ${remainingUsers.length} others are typing`;
@@ -70,14 +73,19 @@ const WhosTypingHelperText = () => {
   }
 
   return (
-    <Typography
-      sx={{ color: '#FAFAFA', fontWeight: 300 }}
-      variant="caption"
-      ml={1}
-      mb={0.2}
-    >
-      {renderString}
-    </Typography>
+    <Box display="flex" alignItems="center">
+      <Typography
+        sx={{ color: '#FAFAFA', fontWeight: 300 }}
+        variant="caption"
+        ml={1}
+        mb={0.2}
+      >
+        {renderString}
+      </Typography>
+      <Box display="flex" ml={2.8}>
+        <div className="dot-flashing"></div>
+      </Box>
+    </Box>
   );
 };
 
