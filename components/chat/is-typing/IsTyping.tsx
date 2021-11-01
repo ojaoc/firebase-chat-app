@@ -52,6 +52,12 @@ const IsTyping = () => {
     };
   }, [focused, handleSetUserIsTyping]);
 
+  useEffect(() => {
+    window.addEventListener('beforeunload', () => {
+      handleSetUserIsTyping(false);
+    });
+  }, [handleSetUserIsTyping]);
+
   // Retrieve users typing from firestore
   const usersTypingRef = collection(firestore, Collections.UsersTyping);
   const q = query(usersTypingRef, orderBy('createdAt', 'desc'));
